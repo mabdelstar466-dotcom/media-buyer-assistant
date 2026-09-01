@@ -33,3 +33,29 @@ st.metric(
     "Expected leads",
     f"{expected_leads:,.0f}"
 )
+st.subheader("Sales and ROAS Forecast")
+
+conversion_rate = st.number_input(
+    "Lead to sale conversion rate (%)",
+    min_value=0.0,
+    max_value=100.0,
+    value=10.0,
+    step=1.0
+)
+
+average_order_value = st.number_input(
+    "Average order value",
+    min_value=0.0,
+    value=500.0,
+    step=50.0
+)
+
+expected_sales = expected_leads * (conversion_rate / 100)
+expected_revenue = expected_sales * average_order_value
+expected_roas = expected_revenue / budget if budget > 0 else 0
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("Expected sales", f"{expected_sales:,.0f}")
+col2.metric("Expected revenue", f"{expected_revenue:,.2f}")
+col3.metric("Expected ROAS", f"{expected_roas:.2f}x")
