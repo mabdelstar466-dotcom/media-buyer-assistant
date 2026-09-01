@@ -1,5 +1,5 @@
 import streamlit as st
-
+import pandas as pd
 st.set_page_config(
     page_title="Media Buyer Assistant",
     page_icon="📊",
@@ -59,3 +59,22 @@ col1, col2, col3 = st.columns(3)
 col1.metric("Expected sales", f"{expected_sales:,.0f}")
 col2.metric("Expected revenue", f"{expected_revenue:,.2f}")
 col3.metric("Expected ROAS", f"{expected_roas:.2f}x")
+st.divider()
+st.header("Meta Ads Report Analyzer")
+
+uploaded_file = st.file_uploader(
+    "Upload your Meta Ads report",
+    type=["csv"]
+)
+
+if uploaded_file is not None:
+    try:
+        report = pd.read_csv(uploaded_file)
+
+        st.success("Report uploaded successfully!")
+        st.write(f"Rows: {len(report)}")
+        st.subheader("Report Preview")
+        st.dataframe(report, use_container_width=True)
+
+    except Exception as error:
+        st.error(f"Could not read the file: {error}")
