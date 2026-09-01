@@ -7,7 +7,5 @@ st.set_page_config(
 )
 
 st.title("📊 Media Buyer Assistant")
-st Buyer Assistant")
-st.write("حلّل حملاتك الإعلانية بسهولة ومجانًا")
-
-st.success("الأبلكيشن اشتغل بنجاح!")
+st.write("Analyze your advertising campaigns easily and for free.")
+st.success("The application is working successfully!")
